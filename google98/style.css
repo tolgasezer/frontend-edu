@@ -1,0 +1,53 @@
+main{
+    display: flex;
+    justify-content: space-between;
+    margin: 0 5% 2px 5%;
+}
+header {
+    display: block;
+    text-align: center;
+    
+       
+}
+section{
+    display: block;
+    text-align: center;
+    background-color: rgb(238, 238, 238);
+    margin: 0 5% 2px 5%;
+}
+input{
+    box-sizing: border-box;
+}
+
+footer{
+    display: block;
+    text-align: center;
+    
+    
+}
+.box1,.box2,.box3{
+    
+    text-align: center;
+    height: 76px;
+    padding-top: 1%;
+    
+    
+}
+.box1 {
+    width: 37%;
+    background-color: #7EE5DA;
+    
+}
+.box2 {
+    margin: 0 2px;
+    width: 22%;
+    background-color: #70CCC2;
+    font-size: 13px;
+    
+}
+.box3 {
+    width: 41%;
+    background-color: #62B3AA;
+    font-size: 13px;  
+    
+}
