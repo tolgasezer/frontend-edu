@@ -6,7 +6,7 @@ function addCloseIcon(element) {
   btn.type = "button";
   btn.className = "close-icon close";
   btn.ariaLabel = "Close";
-  btn.addEventListener("click", (e) => e.target.parentElement.parentElement.remove()); // TODO removeTask ı arrow function yap. '(e) => e.target.parentElement.parentElement.remove();'
+  btn.addEventListener("click", (e) => e.target.parentElement.parentElement.remove()); 
   btn.innerHTML = `<span aria-hidden="true">&times<span/>`;
   element.appendChild(btn);
 }
