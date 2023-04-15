@@ -40,3 +40,9 @@ const addItem = (idTask) => {
   listDOM.append(liDOM);
   addCloseIcon(liDOM);
 };
+
+const deleteItem = (idTask) =>{
+
+  let liDOM = document.createElement("li");
+  liDOM.innerHTML = idTask;
+  listDOM.
