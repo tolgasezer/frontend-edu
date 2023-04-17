@@ -40,3 +40,9 @@ const addItem = (idTask) => {
   listDOM.append(liDOM);
   addCloseIcon(liDOM);
 };
+
+
+
+
+
+
