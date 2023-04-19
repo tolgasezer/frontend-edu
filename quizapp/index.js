@@ -1,42 +1,22 @@
+//Buttons 
+
+const nextBtn = document.getElementById("next");
+const prevBtn = document.getElementById("prev");
+const submitBtn = document.getElementById("submit");
+const restartBtn = document.getElementById("restart");
+const option1 = document.getElementById("option1");
+const option2 = document.getElementById("option2");
+const option3 = document.getElementById("option3");
+const option4 = document.getElementById("option4");
+const userScore = document.getElementById("user-score");
+const totalScore = document.getElementById("total-score");
+const questionText = document.getElementById("question-text");
+
+
 let score = 0;
 let currentQuestion = 0;
 
-//Buttons 
-
-const nextBtn = document.getElementById('next');
-const prevBtn = document.getElementById('prev');
-const submitBtn = document.getElementById('submit');
-const restartBtn = document.getElementById('restart');
-const option1 = document.getElementById('option1');
-const option2 = document.getElementById('option2');
-const option3 = document.getElementById('option3');
-const option4 = document.getElementById('option4');
-const userScore = document.getElementById('user-score');
-const totalScore = document.getElementById('total=score');
-const questionText = document.getElementById('question-text');
-
-//onClick events 
-
-nextBtn.addEventListener('onclick', next);
-prevBtn.addEventListener('onclick', prev);
-submitBtn.addEventListener('onclick', submit);
-restartBtn.addEventListener('onclick', restart);
-//=========================//
-
-// start quiz function
-
-function startQuiz(){
-    currentQuestion= 0;
-    totalScore.innerHTML=questions.length;
-    questionText.innerHTML = questions[currentQuestion].question;
-    option1.innerHTML = questions[currentQuestion].answers[0].option;
-    option2.innerHTML = questions[currentQuestion].answers[1].option;
-    option3.innerHTML = questions[currentQuestion].answers[2].option;
-    option4.innerHTML = questions[currentQuestion].answers[3].option;
-}
-
-startQuiz();
-//   question & answer array 
+//   question & answer array
 let questions = [
     {
         question: "Aşağıgdakilerden hangisi frontend frameworklerinden biri değildir?",
@@ -89,3 +69,95 @@ let questions = [
         
     }
 ]
+
+//Click events 
+
+restartBtn.addEventListener("click", restart);
+prevBtn.addEventListener("click", prev);
+nextBtn.addEventListener("click",next);
+submitBtn.addEventListener("click",submit);
+//=========================//
+
+// start quiz function
+
+
+function startQuiz(){
+    currentQuestion= 0;
+    totalScore.innerHTML= questions.length;
+    questionText.innerHTML = questions[currentQuestion].question;
+    option1.innerHTML = questions[currentQuestion].answers[0].option;
+    option2.innerHTML = questions[currentQuestion].answers[1].option;
+    option3.innerHTML = questions[currentQuestion].answers[2].option;
+    option4.innerHTML = questions[currentQuestion].answers[3].option;
+    option1.onclick = function() {
+        checkAnswer(questions[currentQuestion].answers[0].option);
+    }
+    option2.onclick = function() {
+        checkAnswer(questions[currentQuestion].answers[1].option);
+    }
+    option3.onclick = function() {
+        checkAnswer(questions[currentQuestion].answers[2].option);
+    }
+    option4.onclick = function() {
+        checkAnswer(questions[currentQuestion].answers[3].option);
+    }
+}
+function checkAnswer(selectedOption) {
+    const currentAnswer = questions[currentQuestion].answers.find(answer => answer.option === selectedOption);
+    if (currentAnswer.answer === 'true') {
+      score++;
+    }
+  }
+
+startQuiz();
+ 
+function restart() {
+    currentQuestion = 0;
+    prevBtn.classList.remove("hide");
+    nextBtn.classList.remove("hide");
+    submitBtn.classList.remove("hide");
+    option1.classList.remove("hide");
+    option2.classList.remove("hide");
+    option3.classList.remove("hide");
+    option4.classList.remove("hide");
+    score = 0;
+    userScore.innerHTML = score;
+    startQuiz();
+ };
+
+ function next() {
+    currentQuestion++;
+    if(currentQuestion >= questions.length) {
+        nextBtn.classList.add("hide");
+        prevBtn.classList.remove("hide");
+    }
+    questionText.innerHTML = questions[currentQuestion].question;
+    option1.innerHTML = questions[currentQuestion].answers[0].option;
+    option2.innerHTML = questions[currentQuestion].answers[1].option;
+    option3.innerHTML = questions[currentQuestion].answers[2].option;
+    option4.innerHTML = questions[currentQuestion].answers[3].option;
+ };
+
+ function prev() {
+    currentQuestion--;
+    if(currentQuestion <= 0) {
+        nextBtn.classList.remove("hide");
+        prevBtn.classList.add("hide");
+    }
+    questionText.innerHTML = questions[currentQuestion].question;
+    option1.innerHTML = questions[currentQuestion].answers[0].option;
+    option2.innerHTML = questions[currentQuestion].answers[1].option;
+ 
+    nextBtn.classList.remove("hide");
+ };
+
+ function submit() {
+    prevBtn.classList.add("hide");
+    nextBtn.classList.add("hide");
+    submitBtn.classList.add("hide");
+    option1.classList.add("hide");
+    option2.classList.add("hide");
+    option3.classList.add("hide");
+    option4.classList.add("hide");   
+    questionText.innerHTML ="Congratulations on submitting the Quiz!"
+ }
