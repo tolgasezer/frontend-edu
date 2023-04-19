@@ -49,6 +49,9 @@
     cursor: pointer;
  }
  .options {
+    display: flex;
+    justify-content:center;
+    flex-direction: column;
     padding: 10px;
     order: 3;
  }

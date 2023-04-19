@@ -21,7 +21,14 @@ submitBtn.addEventListener('onclick', submit);
 restartBtn.addEventListener('onclick', restart);
 //=========================//
 
+// start quiz function
 
+function startQuiz(){
+    currentQuestion= 0;
+    totalScore.innerHTML=question.length;
+    questionText.innerHTML = questions[currentQuestion].question;
+    trueBtn.innerHTML = 
+}
 
 //   question & answer array 
 let questions = [
