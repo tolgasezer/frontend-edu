@@ -7,8 +7,10 @@ const nextBtn = document.getElementById('next');
 const prevBtn = document.getElementById('prev');
 const submitBtn = document.getElementById('submit');
 const restartBtn = document.getElementById('restart');
-const trueBtn = document.getElementById('true');
-const falseBtn = document.getElementById('false');
+const option1 = document.getElementById('option1');
+const option2 = document.getElementById('option2');
+const option3 = document.getElementById('option3');
+const option4 = document.getElementById('option4');
 const userScore = document.getElementById('user-score');
 const totalScore = document.getElementById('total=score');
 const questionText = document.getElementById('question-text');
@@ -25,11 +27,15 @@ restartBtn.addEventListener('onclick', restart);
 
 function startQuiz(){
     currentQuestion= 0;
-    totalScore.innerHTML=question.length;
+    totalScore.innerHTML=questions.length;
     questionText.innerHTML = questions[currentQuestion].question;
-    trueBtn.innerHTML = 
+    option1.innerHTML = questions[currentQuestion].answers[0].option;
+    option2.innerHTML = questions[currentQuestion].answers[1].option;
+    option3.innerHTML = questions[currentQuestion].answers[2].option;
+    option4.innerHTML = questions[currentQuestion].answers[3].option;
 }
 
+startQuiz();
 //   question & answer array 
 let questions = [
     {
