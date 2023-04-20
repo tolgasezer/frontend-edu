@@ -21,10 +21,10 @@ let questions = [
     {
         question: "Aşağıgdakilerden hangisi frontend frameworklerinden biri değildir?",
         answers:[
-            {option: "React", answer:"false"},
-            {option: "Vue", answer:"false"},
-            {option: "Angular", answer:"false"},
-            {option: "Ruby on Rails", answer:"true"}
+            {option: "React", answer:false},
+            {option: "Vue", answer:false},
+            {option: "Angular", answer:false},
+            {option: "Ruby on Rails", answer:true}
         ] 
     },
     {
@@ -76,6 +76,8 @@ restartBtn.addEventListener("click", restart);
 prevBtn.addEventListener("click", prev);
 nextBtn.addEventListener("click",next);
 submitBtn.addEventListener("click",submit);
+
+
 //=========================//
 
 // start quiz function
@@ -89,25 +91,46 @@ function startQuiz(){
     option2.innerHTML = questions[currentQuestion].answers[1].option;
     option3.innerHTML = questions[currentQuestion].answers[2].option;
     option4.innerHTML = questions[currentQuestion].answers[3].option;
-    option1.onclick = function() {
-        checkAnswer(questions[currentQuestion].answers[0].option);
-    }
-    option2.onclick = function() {
-        checkAnswer(questions[currentQuestion].answers[1].option);
-    }
-    option3.onclick = function() {
-        checkAnswer(questions[currentQuestion].answers[2].option);
-    }
-    option4.onclick = function() {
-        checkAnswer(questions[currentQuestion].answers[3].option);
-    }
+    
+    option1.onclick = () => {
+        if(questions[currentQuestion].answers[0].answer){
+            score++
+        }
+        userScore.innerHTML = score;
+        if(currentQuestion<questions.length){
+            next();
+        }
+    };
+    option2.onclick = () => {
+        if(questions[currentQuestion].answers[1].answer){
+            score++
+        }
+        userScore.innerHTML = score;
+        if(currentQuestion<questions.length){
+            next();
+        }
+    };
+    option3.onclick = () => {
+        if(questions[currentQuestion].answers[2].answer){
+            score++
+        }
+        userScore.innerHTML = score;
+        if(currentQuestion<questions.length){
+            next();
+        }
+    };
+    option4.onclick = () => {
+        if(questions[currentQuestion].answers[3].answer){
+            score++
+        }
+        userScore.innerHTML = score;
+        if(currentQuestion<questions.length){
+            next();
+        }
+    };
+    prevBtn.classList.add("hide");
 }
-function checkAnswer(selectedOption) {
-    const currentAnswer = questions[currentQuestion].answers.find(answer => answer.option === selectedOption);
-    if (currentAnswer.answer === 'true') {
-      score++;
-    }
-  }
+
 
 startQuiz();
  
@@ -143,6 +166,8 @@ function restart() {
     if(currentQuestion <= 0) {
         nextBtn.classList.remove("hide");
         prevBtn.classList.add("hide");
+    }else{
+        prevBtn.classList.remove("hide")
     }
     questionText.innerHTML = questions[currentQuestion].question;
     option1.innerHTML = questions[currentQuestion].answers[0].option;
