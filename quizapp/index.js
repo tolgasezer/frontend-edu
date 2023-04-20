@@ -30,40 +30,40 @@ let questions = [
     {
         question: "Aşağıgdakilerden hangisi ECMASCRIPT 6 ile birlikte gelmemistir?",
         answers:[
-            {option: "var", answer:"true"},
-            {option: "let, const", answer:"false"},
-            {option: "arrow functions", answer:"false"},
-            {option: "classes", answer:"false"},
+            {option: "var", answer:true},
+            {option: "let, const", answer:false},
+            {option: "arrow functions", answer:false},
+            {option: "classes", answer:false},
 
         ]
     },
     {
         question: "Aşağıdakilerden hangisi, bir döngü içinde kullanıldığında, döngüyü sonlandırmak için kullanılan bir komuttur?",
         answers:[
-            {option: "continue", answer:"false"},
-            {option: "return", answer:"false"},
-            {option: "break", answer:"true"},
-            {option: "exit", answer:"false"},
+            {option: "continue", answer:false},
+            {option: "return", answer:false},
+            {option: "break", answer:true},
+            {option: "exit", answer:false},
 
         ]
     },
     {
         question: "Aşağıdakilerden hangisi, bir JavaScript nesnesindeki belirli bir özelliğin var olup olmadığını kontrol etmek için kullanılan bir yöntemdir?",
         answers:[
-            {option: "exist()", answer:"false"},
-            {option: "includes()", answer:"false"},
-            {option: "hasOwnProperty()", answer:"true"},
-            {option: "isArray()", answer:"false"},
+            {option: "exist()", answer:false},
+            {option: "includes()", answer:false},
+            {option: "hasOwnProperty()", answer:true},
+            {option: "isArray()", answer:false},
 
         ]
     },
     {
         question:"Aşağıdakilerden hangisi, JavaScript'te bir değişkenin değerini ve türünü kontrol etmek için kullanılan bir yöntemdir?",
         answers:[
-            {option: "inspect()", answer:"false"},
-            {option: "typeof()", answer:"true"},
-            {option: "toString()", answer:"false"},
-            {option: "valueOf()", answer:"false"},
+            {option: "inspect()", answer:false},
+            {option: "typeof()", answer:true},
+            {option: "toString()", answer:false},
+            {option: "valueOf()", answer:false},
 
         ]
         
@@ -91,7 +91,7 @@ function startQuiz(){
     option2.innerHTML = questions[currentQuestion].answers[1].option;
     option3.innerHTML = questions[currentQuestion].answers[2].option;
     option4.innerHTML = questions[currentQuestion].answers[3].option;
-    
+    //check answer and ++ score
     option1.onclick = () => {
         if(questions[currentQuestion].answers[0].answer){
             score++
@@ -124,6 +124,7 @@ function startQuiz(){
             score++
         }
         userScore.innerHTML = score;
+        
         if(currentQuestion<questions.length){
             next();
         }
@@ -131,9 +132,10 @@ function startQuiz(){
     prevBtn.classList.add("hide");
 }
 
-
+//call quiz when the page reloaded
 startQuiz();
  
+//restart and reset score and button 
 function restart() {
     currentQuestion = 0;
     prevBtn.classList.remove("hide");
