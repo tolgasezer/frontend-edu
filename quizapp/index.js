@@ -79,6 +79,14 @@ submitBtn.addEventListener("click",submit);
 
 
 //=========================//
+//true or false 
+
+// function isThatTrue(){
+//     if (questions[currentQuestion].answers[0].answer && currentQuestion<questions.length ){
+//         score ++;
+//         next();
+//     }
+// } need to know selected option.
 
 // start quiz function
 
@@ -93,8 +101,8 @@ function startQuiz(){
     option4.innerHTML = questions[currentQuestion].answers[3].option;
     //check answer and ++ score
     option1.onclick = () => {
-        if(questions[currentQuestion].answers[0].answer){
-            score++
+        if(questions[currentQuestion].answers[0].answer && score <= questions.length ){
+            score++    // i cant stop score at 5
         }
         userScore.innerHTML = score;
         if(currentQuestion<questions.length){
@@ -102,7 +110,7 @@ function startQuiz(){
         }
     };
     option2.onclick = () => {
-        if(questions[currentQuestion].answers[1].answer){
+        if(questions[currentQuestion].answers[1].answer && score <= questions.length){
             score++
         }
         userScore.innerHTML = score;
@@ -111,7 +119,7 @@ function startQuiz(){
         }
     };
     option3.onclick = () => {
-        if(questions[currentQuestion].answers[2].answer){
+        if(questions[currentQuestion].answers[2].answer && score <= questions.length){
             score++
         }
         userScore.innerHTML = score;
@@ -120,7 +128,7 @@ function startQuiz(){
         }
     };
     option4.onclick = () => {
-        if(questions[currentQuestion].answers[3].answer){
+        if(questions[currentQuestion].answers[3].answer && score <= questions.length){
             score++
         }
         userScore.innerHTML = score;
@@ -174,7 +182,9 @@ function restart() {
     questionText.innerHTML = questions[currentQuestion].question;
     option1.innerHTML = questions[currentQuestion].answers[0].option;
     option2.innerHTML = questions[currentQuestion].answers[1].option;
- 
+    option3.innerHTML = questions[currentQuestion].answers[2].option;
+    option4.innerHTML = questions[currentQuestion].answers[3].option;
+
     nextBtn.classList.remove("hide");
  };
 
