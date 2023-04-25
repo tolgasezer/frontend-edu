@@ -101,7 +101,7 @@ function startQuiz(){
     option4.innerHTML = questions[currentQuestion].answers[3].option;
     //check answer and ++ score
     option1.onclick = () => {
-        if(questions[currentQuestion].answers[0].answer && score <= questions.length ){
+        if(questions[currentQuestion].answers[0].answer && score < questions.length ){
             score++    // i cant stop score at 5
         }
         userScore.innerHTML = score;
@@ -110,7 +110,7 @@ function startQuiz(){
         }
     };
     option2.onclick = () => {
-        if(questions[currentQuestion].answers[1].answer && score <= questions.length){
+        if(questions[currentQuestion].answers[1].answer && score < questions.length){
             score++
         }
         userScore.innerHTML = score;
@@ -170,7 +170,7 @@ function restart() {
     option3.innerHTML = questions[currentQuestion].answers[2].option;
     option4.innerHTML = questions[currentQuestion].answers[3].option;
  };
-
+ 
  function prev() {
     currentQuestion--;
     if(currentQuestion <= 0) {
