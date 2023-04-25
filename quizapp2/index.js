@@ -1,9 +1,12 @@
 const question= document.getElementById('question');
 const choices = Array.from(document.getElementsByClassName('choice-text'));
-const nextBtn = document.getElementsByClassName('next-btn')
+const nextBtn = document.getElementById('nxt-btn');
 
+//butona baslangicta disabled att vermeye calistigimda sorular gelmiyor.
+nextBtn.setAttribute('disabled', '');
+// duzeldi ama nasil oldugunu anlamadim... ('disabled, '') seklinde yazmak gerekliymis
 let currentQuestion = {};
-let acceptingAnswers = true;
+let acceptingAnswers = false;
 let score = 0;
 let questionCounter = 0;
 let availableQuestions = [];
@@ -70,11 +73,15 @@ choices.forEach(choice => {
     acceptingAnswers = false;
     const selectedChoice = e.target;
     const selectedNumber = selectedChoice.dataset["number"];
-    console.log(selectedNumber)
-
-    getNewQuestion();
+    //secimimde verdigim background css te eziliyor 
+    selectedChoice.parentNode.classList.add('selected');
+    
+    console.log(selectedChoice.parentNode);
+    //secimin ardindan next butonu enable oluyor ancak secilmeyenleri disabled yapamadim.
+    nextBtn.removeAttribute('disabled');
   })
 })
+
 
 startGame();
 
