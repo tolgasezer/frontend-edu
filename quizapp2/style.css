@@ -47,6 +47,7 @@ h3{
     align-items: center;
     max-width: 80rem;
     margin: 0 auto;
+    padding: 1rem;
 }
 
 .container > * {
@@ -70,6 +71,7 @@ h3{
 .text-center{
     text-align: center;
 }
+
 
 .hidden {
     display: none;
@@ -99,4 +101,11 @@ h3{
     box-shadow: none;
     transform: none;
     color: gray;
+}
+
+.next-btn {
+    width: 20rem;
+    margin-left: auto;
+
+    
 }
