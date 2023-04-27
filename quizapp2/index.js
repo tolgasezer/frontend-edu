@@ -1,6 +1,10 @@
 const question= document.getElementById('question');
+const choiceContainer = document.getElementsByClassName('choice-container');
 const choices = Array.from(document.getElementsByClassName('choice-text'));
 const nextBtn = document.getElementById('nxt-btn');
+const restartBtn = document.getElementById('restart-btn')
+
+
 
 //butona baslangicta disabled att vermeye calistigimda sorular gelmiyor.
 nextBtn.setAttribute('disabled', '');
@@ -51,37 +55,63 @@ startGame = () =>{
 
 getNewQuestion = () => {
     if (availableQuestions.length == 0 || questionCounter > MAX_QUESTIONS ){
-      // go to end page
+      nextBtn.classList.add('hidden');
+      restartBtn.classList.remove('hidden');
+      
+      console.log(`Your Score is: ${score}/3`);
     }
     questionCounter++;
     const questionIndex= Math.floor(Math.random()* availableQuestions.length);
     currentQuestion = availableQuestions[questionIndex];
     question.innerText = currentQuestion.question;
+    
 
     choices.forEach( choice =>{
         const number = choice.dataset['number'];
         choice.innerText = currentQuestion['choice' + number]
+        
     });
     availableQuestions.splice(questionIndex, 1);
     acceptingAnswers= true;
+  
+    
+  
 }
 
 choices.forEach(choice => {
   choice.addEventListener('click', (e) => {
+    //console.log(e);
     if (!acceptingAnswers) return;
 
     acceptingAnswers = false;
     const selectedChoice = e.target;
     const selectedNumber = selectedChoice.dataset["number"];
-    //secimimde verdigim background css te eziliyor 
-    selectedChoice.parentNode.classList.add('selected');
+    //console.log(selectedNumber)
+    if (selectedNumber==currentQuestion.answer){
+      score++
+    }
+     
+    selectedChoice.classList.add('selected');
     
-    console.log(selectedChoice.parentNode);
-    //secimin ardindan next butonu enable oluyor ancak secilmeyenleri disabled yapamadim.
+    
+    //secimin ardindan next butonu enable oluyor ve next butonunda selected class i kaldiriliyor.
     nextBtn.removeAttribute('disabled');
+    nextBtn.addEventListener('click', ()=>{
+      selectedChoice.classList.remove('selected');
+    } )
+    
   })
 })
 
 
+restartQuiz = () =>{
+  window.location.assign('./index.html')
+
+  startGame();
+}
+
+nextBtn.addEventListener('click', getNewQuestion);
+restartBtn.addEventListener('click', restartQuiz);
 startGame();
 
+//console.log(currentQuestion.answer);

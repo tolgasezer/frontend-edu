@@ -53,6 +53,7 @@ h3{
 
 .container > * {
     width: 100%;
+    
 }
 
 .flex-column {
@@ -105,12 +106,8 @@ h3{
     
 }
 
-.next-btn {
+.next-btn, .restart-btn {
     margin-left: auto;
   
 }
 
-.selected {
-    box-sizing: content-box;
-    background-color: #56a5eb;
-}
