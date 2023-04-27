@@ -58,7 +58,7 @@ getNewQuestion = () => {
       nextBtn.classList.add('hidden');
       restartBtn.classList.remove('hidden');
       
-      console.log(`Your Score is: ${score}/3`);
+      console.log(`Your Score is: ${score*CORRECT_BONUS}/${MAX_QUESTIONS*CORRECT_BONUS}`);
     }
     questionCounter++;
     const questionIndex= Math.floor(Math.random()* availableQuestions.length);
