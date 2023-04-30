@@ -83,7 +83,7 @@ choices.forEach(choice => {
     //console.log(e);
     if (!acceptingAnswers) return;
 
-    acceptingAnswers = false;
+    //acceptingAnswers = false;
     const selectedChoice = e.target;
     const selectedNumber = selectedChoice.dataset["number"];
     //console.log(selectedNumber)
