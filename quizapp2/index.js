@@ -43,7 +43,7 @@ let questions = [
   ]
 
 const CORRECT_BONUS = 10;
-const MAX_QUESTIONS = 3;
+const MAX_QUESTIONS = questions.length;
 
 
 startGame = () =>{
@@ -92,6 +92,8 @@ choices.forEach(choice => {
     }
      
     selectedChoice.classList.add('selected');
+    
+    
     
     
     //secimin ardindan next butonu enable oluyor ve next butonunda selected class i kaldiriliyor.
