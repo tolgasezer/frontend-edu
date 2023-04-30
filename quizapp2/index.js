@@ -98,6 +98,7 @@ choices.forEach(choice => {
     nextBtn.removeAttribute('disabled');
     nextBtn.addEventListener('click', ()=>{
       selectedChoice.classList.remove('selected');
+      nextBtn.setAttribute('disabled', '');
     } )
     
   })
