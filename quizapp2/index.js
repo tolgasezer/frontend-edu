@@ -16,33 +16,20 @@ let availableQuestions = [];
 let questions = [
   {
     question: "Inside which HTML element do we put the JavaScript??",
-    choiceText: ["<script>", "<javascript>", "<js>", "<scripting>", "deneme"],
-    answer: 1,
+    choiceText: ["<script>", "<javascript>", "<js>", "<scripting>"],
+    answer: 1
   },
   {
-    question:
-      "What is the correct syntax for referring to an external script called 'xxx.js'?",
-    choiceText: [
-      "a",
-      "b",
-      "c",
-      "d",
-      "deneme",
-    ],
-    answer: 3,
+    question: "What is the correct syntax for referring to an external script called 'xxx.js'?",
+    choiceText: ["<script href='xxx.js'>", "<script name='xxx.js'>", "<script src='xxx.js'>", "<script file='xxx.js'>"],
+    answer: 3
   },
   {
     question: " How do you write 'Hello World' in an alert box?",
-    choiceText: [
-      "msgBox('Hello World');",
-      "alertBox('Hello World');",
-      "msg('Hello World');",
-      "alert('Hello World');",
-      "deneme",
-    ],
-    answer: 4,
-  },
-];
+    choiceText: ["msgBox('Hello World');", "alertBox('Hello World');", "msg('Hello World');", "alert('Hello World');"],
+    answer: 4
+  }
+]
 
 const CORRECT_BONUS = 10;
 const MAX_QUESTIONS = questions.length;
@@ -71,13 +58,19 @@ getNewQuestion = () => {
   question.innerText = currentQuestion.question;
   console.log(currentQuestion.choiceText);
 
-  var str = "<ul>";
+  //var str = "<ul class='choice-container'>";
   for(let i = 0; i < currentQuestion.choiceText.length; i++){
-    str+= '<li id="option">' + currentQuestion.choiceText[i] + '</li>';
+    const newChoice = document.createElement('div');
+    const choiceTextNode = document.createTextNode(`${currentQuestion.choiceText[i]}`);
+    newChoice.appendChild(choiceTextNode);
+    choiceContainer.appendChild(newChoice);
+    newChoice.classList.add('choice-container');
+    
+    //str+= '<li class="choice-text" id="option">' + currentQuestion.choiceText[i] + '</li>'; bu cok karmasik oldu duzenledim
   }
-  str += '</ul>';
+  //str += '</ul>';
   console.log(document.getElementById("choice-container"));
-  choiceContainer.innerHTML = str;
+  //choiceContainer.innerHTML = str;
   availableQuestions.splice(questionIndex, 1);
   acceptingAnswers = true;
 };
