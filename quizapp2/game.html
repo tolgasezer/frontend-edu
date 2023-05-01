@@ -7,32 +7,19 @@
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="game.css">
-    <script src="index.js" defer></script>
 </head>
 <body>
     <div class="container" id="containerC">
         <div id="game" class="justify-content flex-column">
             <h2 id="question">Soru burada</h2>
-            <div class="choice-container">
-                <p class="choice-prefix">A</p>
-                <p class="choice-text" data-number="1" >Choice 1</p>
-            </div>
-            <div class="choice-container">
-                <p class="choice-prefix">B</p>
-                <p class="choice-text" data-number="2">Choice 2</p>
-            </div>
-            <div class="choice-container">
-                <p class="choice-prefix">C</p>
-                <p class="choice-text" data-number="3">Choice 3</p>
-            </div>
-            <div class="choice-container">
-                <p class="choice-prefix">D</p>
-                <p class="choice-text" data-number="4">Choice 4</p>
-            </div>
+            <div id="choice-container"></div>
+        
             <button id="nxt-btn" class="btn next-btn">Next</button>
             <button id="restart-btn" class="btn restart-btn hidden">Restart</button>
         </div>
         
     </div>
+
+    <script src="index.js"></script>
 </body>
 </html>

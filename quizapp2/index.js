@@ -1,5 +1,5 @@
 const question = document.getElementById("question");
-const choiceContainer = document.getElementsByClassName("choice-container");
+const choiceContainer = document.getElementById("choice-container");
 const choices = Array.from(document.getElementsByClassName("choice-text"));
 const nextBtn = document.getElementById("nxt-btn");
 const restartBtn = document.getElementById("restart-btn");
@@ -23,10 +23,10 @@ let questions = [
     question:
       "What is the correct syntax for referring to an external script called 'xxx.js'?",
     choiceText: [
-      "<script href='xxx.js'>",
-      "<script name='xxx.js'>",
-      "<script src='xxx.js'>",
-      "<script file='xxx.js'>",
+      "a",
+      "b",
+      "c",
+      "d",
       "deneme",
     ],
     answer: 3,
@@ -71,19 +71,13 @@ getNewQuestion = () => {
   question.innerText = currentQuestion.question;
   console.log(currentQuestion.choiceText);
 
-  choices.forEach((choice) => {
-    const number = choice.dataset["number"]; //burada sinirlaniyor.
-    choice.innerText = currentQuestion.choiceText[number - 1]; //kanser oldum ama adim adim ilerliyorum.
-
-    // if (!(number < currentQuestion.choiceText.length)) {
-    //   //create and add choice-container
-    //   choiceContainer.innerHTML += `<div class="choice-container">`;
-    //   choiceContainer.innerHTML += `<button class="choice-text">${currentQuestion.choiceText[number - 1]}</button>`;;
-    //   choiceContainer.innerHTML += `</div>`;
-
-    // }
-    // console.log(number);
-  });
+  var str = "<ul>";
+  for(let i = 0; i < currentQuestion.choiceText.length; i++){
+    str+= '<li id="option">' + currentQuestion.choiceText[i] + '</li>';
+  }
+  str += '</ul>';
+  console.log(document.getElementById("choice-container"));
+  choiceContainer.innerHTML = str;
   availableQuestions.splice(questionIndex, 1);
   acceptingAnswers = true;
 };
@@ -101,9 +95,7 @@ choices.forEach((choice) => {
       score++;
     }
     // if selectedChoice change, change to selected class
-
     
-
     selectedChoice.classList.add("selected");
 
     //secimin ardindan next butonu enable oluyor ve next butonunda selected class i kaldiriliyor.
@@ -125,4 +117,4 @@ nextBtn.addEventListener("click", getNewQuestion);
 restartBtn.addEventListener("click", restartQuiz);
 startGame();
 
-//console.log(currentQuestion.answer);
+console.log(Array.from(currentQuestion.answer));
