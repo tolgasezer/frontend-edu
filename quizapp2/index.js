@@ -5,10 +5,10 @@ const nextBtn = document.getElementById("nxt-btn");
 const restartBtn = document.getElementById("restart-btn");
 
 //butona baslangicta disabled att vermeye calistigimda sorular gelmiyor.
-nextBtn.setAttribute("disabled", "");
+
 // duzeldi ama nasil oldugunu anlamadim... ('disabled, '') seklinde yazmak gerekliymis
 let currentQuestion = {};
-let acceptingAnswers = false;
+//let acceptingAnswers = false;
 let score = 0;
 let questionCounter = 0;
 let availableQuestions = [];
@@ -17,17 +17,17 @@ let questions = [
   {
     question: "Inside which HTML element do we put the JavaScript??",
     choiceText: ["<script>", "<javascript>", "<js>", "<scripting>","deneme"],
-    answer: 1
+    answer: 0
   },
   {
     question: "What is the correct syntax for referring to an external script called 'xxx.js'?",
     choiceText: ["<script href='xxx.js'>", "<script name='xxx.js'>", "<script src='xxx.js'>", "<script file='xxx.js'>","deneme"],
-    answer: 3
+    answer: 2
   },
   {
     question: " How do you write 'Hello World' in an alert box?",
     choiceText: ["msgBox('Hello World');", "alertBox('Hello World');", "msg('Hello World');", "alert('Hello World');", "deneme"],
-    answer: 4
+    answer: 3
   }
 ]
 
@@ -46,6 +46,7 @@ startGame = () => {
 
 getNewQuestion = () => {
   choiceContainer.innerHTML = "";
+  nextBtn.setAttribute("disabled", "");
   if (availableQuestions.length == 0 || questionCounter > MAX_QUESTIONS) {
     nextBtn.classList.add("hidden");
     restartBtn.classList.remove("hidden");
@@ -71,14 +72,19 @@ getNewQuestion = () => {
     newChoice.classList.add('choice-container'); //prefix i feda ettik ama olsun.
     
     newChoice.addEventListener('click', () => {
-      // Tüm choice-container'ları seçim yapılamayan duruma getir
+      // Tüm choice-container'ları seçim yapılmamış duruma getir
       const allChoices = document.querySelectorAll('.choice-container');
       allChoices.forEach(choice => {
         choice.classList.remove('selected');
       });
-    
-      // Seçili olan choice-container'a selected class'ını ekle
+      
+      // Seçili olan choice-containera selected classı ekle
       newChoice.classList.add('selected');
+      if(i == currentQuestion.answer){
+        score++
+      }
+      console.log(Array.from(allChoices));
+      
       nextBtn.removeAttribute("disabled");
     });
     
@@ -90,7 +96,7 @@ getNewQuestion = () => {
   //console.log(document.getElementById("choice-container"));
   //choiceContainer.innerHTML = str;
   availableQuestions.splice(questionIndex, 1);
-  acceptingAnswers = true;
+  //acceptingAnswers = true;
 };
 
 // clickHandler = () =>{
@@ -146,3 +152,4 @@ restartBtn.addEventListener("click", restartQuiz);
 startGame();
 
 
+//console.log(currentQuestion.choiceText);
