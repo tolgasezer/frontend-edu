@@ -83,10 +83,12 @@ getNewQuestion = () => {
       if(i == currentQuestion.answer){
         score++
       }
+      
       console.log(Array.from(allChoices));
       
       nextBtn.removeAttribute("disabled");
     });
+    
     
     //str+= '<li class="choice-text" id="option">' + currentQuestion.choiceText[i] + '</li>'; bu cok karmasik oldu duzenledim
   }
