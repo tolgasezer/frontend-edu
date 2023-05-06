@@ -47,6 +47,7 @@ startGame = () => {
 getNewQuestion = () => {
   choiceContainer.innerHTML = "";
   nextBtn.setAttribute("disabled", "");
+  
   if (availableQuestions.length == 0 || questionCounter > MAX_QUESTIONS) {
     nextBtn.classList.add("hidden");
     restartBtn.classList.remove("hidden");
@@ -62,6 +63,7 @@ getNewQuestion = () => {
   question.innerText = currentQuestion.question;
 
   //console.log(currentQuestion.choiceText);
+
 
   //var str = "<ul class='choice-container'>";
   for(let i = 0; i < currentQuestion.choiceText.length; i++){
@@ -80,18 +82,16 @@ getNewQuestion = () => {
       
       // Seçili olan choice-containera selected classı ekle
       newChoice.classList.add('selected');
-      if(i == currentQuestion.answer){
-        score++
-      }
       
-      console.log(Array.from(allChoices));
       
+      //console.log(choicesArray.indexOf('div.choice-container.selected'));
       nextBtn.removeAttribute("disabled");
     });
     
     
     //str+= '<li class="choice-text" id="option">' + currentQuestion.choiceText[i] + '</li>'; bu cok karmasik oldu duzenledim
   }
+  
   
   
   //str += '</ul>';
@@ -149,7 +149,13 @@ restartQuiz = () => {
   startGame();
 };
 
-nextBtn.addEventListener("click", getNewQuestion);
+nextBtn.addEventListener("click", ()=>{
+  const selected = document.querySelector('.selected');
+  console.log(selected.innerHTML);
+  if (selected.innerText == currentQuestion.choiceText[currentQuestion.answer]){
+    score++;
+  };
+  getNewQuestion()});
 restartBtn.addEventListener("click", restartQuiz);
 startGame();
 
