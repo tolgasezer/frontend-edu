@@ -31,6 +31,8 @@ let questions = [
   }
 ]
 
+fetch ('https://opentdb.com/api.php?amount=10&category=18&difficulty=easy&type=multiple')// fetch start 
+
 const CORRECT_BONUS = 10;
 const MAX_QUESTIONS = questions.length;
 
