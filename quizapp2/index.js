@@ -35,9 +35,14 @@ async function logJSONData() {
   const response = await fetch('https://opentdb.com/api.php?amount=10&category=18&difficulty=easy&type=multiple');
   const jsonData = await response.json();
   console.log(jsonData);
+  return jsonData;
 }
 
+
 logJSONData(); // 10 soruluk bir array donuyor. gelen arrayden question ve answerlari gerekli yere iletecek bicimde guncellemem lazim 
+const takeQuestion = jsonData
+
+console.log(takeQuestion);
 
 const CORRECT_BONUS = 10;
 const MAX_QUESTIONS = questions.length;
