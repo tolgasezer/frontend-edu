@@ -6,7 +6,6 @@ const restartBtn = document.getElementById("restart-btn");
 
 //butona baslangicta disabled att vermeye calistigimda sorular gelmiyor.
 
-// duzeldi ama nasil oldugunu anlamadim... ('disabled, '') seklinde yazmak gerekliymis
 let currentQuestion = {};
 //let acceptingAnswers = false;
 let score = 0;
