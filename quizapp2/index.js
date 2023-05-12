@@ -46,7 +46,7 @@ console.log(takeQuestion);
 const CORRECT_BONUS = 10;
 const MAX_QUESTIONS = questions.length;
 
-//console.log(questions[0].choiceText);
+
 
 startGame = () => {
   score = 0;
@@ -74,16 +74,13 @@ getNewQuestion = () => {
   currentQuestion = availableQuestions[questionIndex];
   question.innerText = currentQuestion.question;
 
-  //console.log(currentQuestion.choiceText);
-
-
-  //var str = "<ul class='choice-container'>";
+  
   for(let i = 0; i < currentQuestion.choiceText.length; i++){
     const newChoice = document.createElement('div');
     const choiceTextNode = document.createTextNode(`${currentQuestion.choiceText[i]}`);
     newChoice.appendChild(choiceTextNode);
     choiceContainer.appendChild(newChoice);
-    newChoice.classList.add('choice-container'); //prefix i feda ettik ama olsun.
+    newChoice.classList.add('choice-container'); 
     
     newChoice.addEventListener('click', () => {
       // Tüm choice-container'ları seçim yapılmamış duruma getir
