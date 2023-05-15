@@ -6,6 +6,7 @@ const restartBtn = document.getElementById("restart-btn");
 
 //butona baslangicta disabled att vermeye calistigimda sorular gelmiyor.
 
+// duzeldi ama nasil oldugunu anlamadim... ('disabled, '') seklinde yazmak gerekliymis
 let currentQuestion = {};
 //let acceptingAnswers = false;
 let score = 0;
@@ -30,23 +31,18 @@ let questions = [
   }
 ]
 
-async function logJSONData() {
-  const response = await fetch('https://opentdb.com/api.php?amount=10&category=18&difficulty=easy&type=multiple');
-  const jsonData = await response.json();
-  console.log(jsonData);
-  return jsonData;
-}
+fetch('https://opentdb.com/api.php?amount=10&category=18&difficulty=easy&type=multiple')
 
 
-logJSONData(); // 10 soruluk bir array donuyor. gelen arrayden question ve answerlari gerekli yere iletecek bicimde guncellemem lazim 
-const takeQuestion = jsonData
+//logJSONData(); // 10 soruluk bir array donuyor. gelen arrayden question ve answerlari gerekli yere iletecek bicimde guncellemem lazim 
+//const takeQuestion = jsonData
 
-console.log(takeQuestion);
+//console.log(takeQuestion);
 
 const CORRECT_BONUS = 10;
 const MAX_QUESTIONS = questions.length;
 
-
+//console.log(questions[0].choiceText);
 
 startGame = () => {
   score = 0;
@@ -74,13 +70,16 @@ getNewQuestion = () => {
   currentQuestion = availableQuestions[questionIndex];
   question.innerText = currentQuestion.question;
 
-  
+  //console.log(currentQuestion.choiceText);
+
+
+  //var str = "<ul class='choice-container'>";
   for(let i = 0; i < currentQuestion.choiceText.length; i++){
     const newChoice = document.createElement('div');
     const choiceTextNode = document.createTextNode(`${currentQuestion.choiceText[i]}`);
     newChoice.appendChild(choiceTextNode);
     choiceContainer.appendChild(newChoice);
-    newChoice.classList.add('choice-container'); 
+    newChoice.classList.add('choice-container'); //prefix i feda ettik ama olsun.
     
     newChoice.addEventListener('click', () => {
       // Tüm choice-container'ları seçim yapılmamış duruma getir

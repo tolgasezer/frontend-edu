@@ -11,25 +11,36 @@
   margin-right: 16px;
   font-family: arial,sans-serif;
   font-size: 13px;
-  
-}
 
+}
+.headerli img{
+  border-radius: 50%;
+
+}
+.headerli img:hover{
+  box-shadow:#70757a;
+}
 .headerli a {
   display: block;
   color: black;
   text-align: center;
   padding: 5px 5px;
   text-decoration: none;
+  
+
 }
+
 
 .headerli a:hover {
   text-decoration: underline;
+  
   
 }
 
 .container {
   text-align: center;
   margin: 100px;
+  
 }
 
 .search-area {
@@ -116,26 +127,34 @@ box-shadow: 0 2px 3px 0 rgba(0,0,0,0.24), 0 2px 5px 0 rgba(0,0,0,0.19);
 }
 .buttons{
   border-radius: 25px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  
 }
 .googlesearch {
   margin: 11px 4px;
   padding: 0 16px;
   line-height: 27px;
+  height: 36px;
   min-width: 54px;
   text-align: center;
   cursor: pointer;
   user-select: none;
-  margin-left: 32%;
+  /*margin-left: 32%;*/
 }
 
 .feelinglucky {
   padding: 0 16px;
   line-height: 27px;
   min-width: 54px;
+  height: 36px;
   text-align: center;
   cursor: pointer;
   user-select: none;
-  margin-right: 20%;
+  /*margin-right: 20%;*/
 }
 
 .footer {
