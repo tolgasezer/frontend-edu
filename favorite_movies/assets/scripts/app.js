@@ -16,3 +16,4 @@ backDropControl = ()=>{
 
 addMovieBtn.addEventListener('click', toggleMovieModal);
 cancelBtnbtn.addEventListener('click', toggleMovieModal);
+backDropBlock.addEventListener('click',toggleMovieModal);
