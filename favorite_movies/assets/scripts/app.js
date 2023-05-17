@@ -7,6 +7,7 @@ const userInputs = modalBlock.querySelectorAll('input');
 const entryText = document.getElementById('entry-text');
 
 
+
 const movies = [];
 
 const udpateUI = ()=>{
@@ -17,19 +18,33 @@ const udpateUI = ()=>{
     }
 };
 
-const newMovieRender = (title, imageUrl, rating) =>{
+const removeElementHandler = (movieId) =>{
+    let movieIndex=0;
+    for(const movie of movies){
+        if (movie.id === movieId){
+            break;
+        }
+        movieIndex++;
+    };
+    movies.splice(movieIndex, 1);
+    const listRoot = document.getElementById('movie-list');
+    listRoot.children[movieIndex].remove();
+};
+
+const newMovieRender = (id, title, imageUrl, rating) =>{
     const newMovieEl = document.createElement('li');
     newMovieEl.className = 'movie-element';
     newMovieEl.innerHTML = `
         <div class= "movie-element__image">
             <img src ="${imageUrl}" alt="${title}"> 
-        <div>
+        </div>
         <div class="movie-element__info">
             <h2>${title}</h2>
             <p>${rating}/5 Stars</p>
-        <div>
+        </div>
         `;
     const listRoot = document.getElementById('movie-list');
+    newMovieEl.addEventListener('click', removeElementHandler.bind(null, id));
     listRoot.append(newMovieEl);
 
 }
@@ -58,21 +73,22 @@ const addMovieHandler = ()=>{
     const imageUrlValue = userInputs[1].value;
     const ratingValue = userInputs[2].value;
 
-        if (titleValue === '' || imageUrlValue === '' || ratingValue === '' || +ratingValue< 1 || +ratingValue > 5){
-          alert('Please input valid number ');
-            return;
-        }
+    if (titleValue.trim() === '' || imageUrlValue.trim() === '' || ratingValue.trim() === '' || +ratingValue< 1 || +ratingValue > 5){
+        alert('Please input valid number ');
+        return;
+    }
     const newMovie = {
+        id: Math.random().toString(),
         title: titleValue,
         imageUrl: imageUrlValue,
-        rating: ratingValue,
+        rating: ratingValue
     }
     movies.push(newMovie);
     console.log(movies);
     toggleMovieModal();
     resetUserInput();
+    newMovieRender(newMovie.id, newMovie.title, newMovie.imageUrl, newMovie.rating);
     udpateUI();
-    newMovieRender(newMovie.title, newMovie.imageUrl, newMovie.rating);
 };
 
 const cancelMoviehandler = () =>{
