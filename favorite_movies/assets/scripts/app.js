@@ -43,8 +43,13 @@ const removeElementHandler = (movieId) =>{
     
     toggleBackdrop();
     deleteMovieModal.classList.add('visible');
-    
     //deleteMovie(movieId);
+    //const cancelDeletionBtn = deleteMovieModal.querySelector('.btn--passive');
+   // const confirmDeletionBtn = deleteMovieModal.querySelector('.btn--danger');
+
+    //cancelDeletionBtn.addEventListener('click', cancelMovieDeletion);
+   // confirmDeletionBtn.addEventListener('click', deleteMovie.bind(null, movieId));
+
    
 };
 
@@ -74,6 +79,7 @@ const resetUserInput = ()=>{
 
 const closeMovieModal = ()=>{
     modalBlock.classList.remove('visible');
+    
     
 };
 
@@ -121,6 +127,7 @@ const addMovieHandler = ()=>{
 const cancelMoviehandler = () =>{
     resetUserInput();
     closeMovieModal();
+    toggleBackdrop();
 }
 
 addMovieBtn.addEventListener('click', showMovieModal);
