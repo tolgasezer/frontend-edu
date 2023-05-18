@@ -5,6 +5,7 @@ const cancelBtn = modalBlock.querySelector('.btn--passive');
 const addBtn = cancelBtn.nextElementSibling;
 const userInputs = modalBlock.querySelectorAll('input');
 const entryText = document.getElementById('entry-text');
+const deleteMovieModal = document.getElementById('delete-modal');
 
 
 
@@ -18,7 +19,7 @@ const udpateUI = ()=>{
     }
 };
 
-const removeElementHandler = (movieId) =>{
+const deleteMovie = movieId =>{
     let movieIndex=0;
     for(const movie of movies){
         if (movie.id === movieId){
@@ -29,6 +30,15 @@ const removeElementHandler = (movieId) =>{
     movies.splice(movieIndex, 1);
     const listRoot = document.getElementById('movie-list');
     listRoot.children[movieIndex].remove();
+
+}
+
+const removeElementHandler = (movieId) =>{
+    
+    deleteMovieModal.classList.add('visible');
+    
+    deleteMovie(movieId);
+    toggleBackdrop();
 };
 
 const newMovieRender = (id, title, imageUrl, rating) =>{
@@ -56,6 +66,7 @@ const resetUserInput = ()=>{
 };
 
 const toggleMovieModal= ()=>{
+
     modalBlock.classList.toggle('visible');
     toggleBackdrop();
 };
