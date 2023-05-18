@@ -31,14 +31,21 @@ const deleteMovie = movieId =>{
     const listRoot = document.getElementById('movie-list');
     listRoot.children[movieIndex].remove();
 
-}
+};
+
+const cancelMovieDeletion = ()=>{
+    toggleBackdrop();
+    deleteMovieModal.classList.remove('visible');
+    
+};
 
 const removeElementHandler = (movieId) =>{
     
+    toggleBackdrop();
     deleteMovieModal.classList.add('visible');
     
-    deleteMovie(movieId);
-    toggleBackdrop();
+    //deleteMovie(movieId);
+   
 };
 
 const newMovieRender = (id, title, imageUrl, rating) =>{
@@ -65,9 +72,14 @@ const resetUserInput = ()=>{
     })
 };
 
-const toggleMovieModal= ()=>{
+const closeMovieModal = ()=>{
+    modalBlock.classList.remove('visible');
+    
+};
 
-    modalBlock.classList.toggle('visible');
+const showMovieModal = ()=>{
+
+    modalBlock.classList.add('visible');
     toggleBackdrop();
 };
 
@@ -77,7 +89,10 @@ const toggleBackdrop = ()=>{
 };
 
 const backdropHandler = ()=>{
-    toggleMovieModal();
+    closeMovieModal();
+    cancelMovieDeletion();
+    resetUserInput();
+   
 }
 const addMovieHandler = ()=>{
     const titleValue = userInputs[0].value;
@@ -96,18 +111,19 @@ const addMovieHandler = ()=>{
     }
     movies.push(newMovie);
     console.log(movies);
-    toggleMovieModal();
+    closeMovieModal();
     resetUserInput();
+    toggleBackdrop();
     newMovieRender(newMovie.id, newMovie.title, newMovie.imageUrl, newMovie.rating);
     udpateUI();
 };
 
 const cancelMoviehandler = () =>{
     resetUserInput();
-    toggleMovieModal();
+    closeMovieModal();
 }
 
-addMovieBtn.addEventListener('click', toggleMovieModal);
+addMovieBtn.addEventListener('click', showMovieModal);
 cancelBtn.addEventListener('click', cancelMoviehandler);
 backDropBlock.addEventListener('click',backdropHandler);
 addBtn.addEventListener('click', addMovieHandler);
