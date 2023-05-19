@@ -46,7 +46,12 @@ const removeElementHandler = (movieId) =>{
     deleteMovieModal.classList.add('visible');
     //deleteMovie(movieId);
     const cancelDeletionBtn = deleteMovieModal.querySelector('.btn--passive');
-    const confirmDeletionBtn = deleteMovieModal.querySelector('.btn--danger');
+    let confirmDeletionBtn = deleteMovieModal.querySelector('.btn--danger');
+
+    confirmDeletionBtn.replaceWith(confirmDeletionBtn.cloneNode(true));
+    confirmDeletionBtn = deleteMovieModal.querySelector('.btn--danger');
+
+    cancelDeletionBtn.removeEventListener('click',cancelMovieDeletion);
 
     cancelDeletionBtn.addEventListener('click', cancelMovieDeletion);
     confirmDeletionBtn.addEventListener('click', deleteMovie.bind(null, movieId));
