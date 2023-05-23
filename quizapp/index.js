@@ -11,7 +11,7 @@ const option4 = document.getElementById("option4");
 const userScore = document.getElementById("user-score");
 const totalScore = document.getElementById("total-score");
 const questionText = document.getElementById("question-text");
-
+//need to fix buttons
 
 let score = 0;
 let currentQuestion = 0;
