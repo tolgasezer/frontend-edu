@@ -45,7 +45,6 @@ input.empty {
   color: lightgrey;
 }
 
-.navbar {
-  position: relative;
-  padding: 10px;
+body{
+  padding-top: 10vh;
 }
