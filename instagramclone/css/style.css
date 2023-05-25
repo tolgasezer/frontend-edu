@@ -2,6 +2,8 @@
   text-align: center;
   font-size: 14px;
   color: gray;
+  background-image: url(/instagramclone/assets/search-solid.svg);
+  background-repeat: no-repeat;
   background-position: 40%;
   background-size: 6%;
 }
@@ -44,7 +46,14 @@ input.empty {
   text-decoration: none;
   color: lightgrey;
 }
-
 body{
-  padding-top: 10vh;
+  padding: 12vh;
+}
+
+.mar192{
+  margin-left: 192px;
+}
+
+.middlearea {
+  max-height: 200px !important;
 }
