@@ -2,7 +2,24 @@ const addMovieBtn = document.getElementById('add-movie-btn');
 const searchBtn = document.getElementById('search-btn');
 
 
-let movie = [];
+let movies = [];
+
+const renderMovie = ()=>{
+    const movieList = document.getElementById('movie-list');
+    
+    if (movies.length === 0){
+        movieList.classList.remove('visible');
+    }else{
+        movieList.classList.add('visible');
+    }
+    movieList.innerHTML = '';
+
+    movies.forEach((movie)=>{
+        const movieEl = document.createElement('li');
+        movieEl.innerHTML = movie.info.title;
+        movieList.appendChild(movieEl);
+    })
+}
 
 const addMovieBtnHandler = () =>{
     const title = document.getElementById('title').value;
@@ -21,9 +38,8 @@ const addMovieBtnHandler = () =>{
         id: Math.random()
     };
     
-    movie.push(movieObj);
-    console.log(movieObj);
-    
+    movies.push(movieObj);
+    renderMovie();
 
 };
 
