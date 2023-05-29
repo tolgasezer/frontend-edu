@@ -1,18 +1,35 @@
 const addMovieBtn = document.getElementById('add-movie-btn');
 const searchBtn = document.getElementById('search-btn');
 
-addMovieBtn.addEventListener('click', addMovieBtnHandler);
-searchBtn.addEventListener('click', searchBtnHandler); 
 
+let movie = [];
 
-const addMovieBtnHandler = () =>{};
+const addMovieBtnHandler = () =>{
+    const title = document.getElementById('title').value;
+    const extraName = document.getElementById('extra-name').value;
+    const extraValue = document.getElementById('extra-value').value;
+    
+    if ( title.trim()=== '' || extraName.trim()==='' || extraValue.trim()===''){
+        return;
+    };
+
+    const movieObj = {
+        info: {
+            title,
+            [extraName]: extraValue
+        },
+        id: Math.random()
+    };
+    
+    movie.push(movieObj);
+    console.log(movieObj);
+    
+
+};
 
 const searchBtnHandler =() =>{};
 
-const movieObj = {
-    title : 'getuserinput',
-    [extraInfo]: 'getUserInput',
-    
 
+addMovieBtn.addEventListener('click', addMovieBtnHandler);
+searchBtn.addEventListener('click', searchBtnHandler); 
 
-}
