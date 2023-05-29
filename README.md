@@ -12,5 +12,6 @@ Bu repository'den faydalanmak için aşağıdaki adımları izleyebilirsiniz:
 
 Repository'nin ana sayfasında bulunan "Code" düğmesine tıklayarak kaynak kodlarını bilgisayarınıza indirin veya projeyi doğrudan kopyalayın.
 
-Örnek projelerin kaynak kodlarına göz atarak, farklı frontend teknolojilerini deneyebilir ve uygulamalarınızı geliştirebilirsiniz.
+Örnek projelerin kaynak kodlarına göz atarak, farklı frontend teknolojilerini deneyebilir ve var olan projelerin eksiklerini tamamlayarak
+kendi gelişiminize katkıda bulunabilirsiniz.
 
