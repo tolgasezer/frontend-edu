@@ -12,7 +12,34 @@ class Product {
     }
 }
 
-class ShoppingCart {
+class ElementAttribute {
+    constructor(attrName, attrValue) {
+        this.name =attrName;
+        this.value = attrValue;
+    }
+}
+
+class Component {
+    constructor( renderHook) {
+        this.hook = renderHook;
+    }
+
+    createRootElement(tag, cssClasses, attributes) {
+        const rootElemet = document.createElement(tag);
+        if (cssClasses) {
+            rootElemet.className = cssClasses;
+            }
+        if  (attributes && attributes.length >0){
+            for (const attr of attributes) {
+                rootElemet.setAttribute(attr.name, attr.value);
+            }
+        }
+        document.getElementById(this.hook).append(rootElemet);
+        return rootElemet;
+    }
+}
+
+class ShoppingCart extends Component {
     item = [];
 
     set cartItems(value) {
@@ -25,6 +52,10 @@ class ShoppingCart {
         return sum;
     }
 
+    constructor(renderHook){
+        super(renderHook);
+    }
+
     addItem(product){
         const updatedItems = [...this.item];
         updatedItems.push(product);
@@ -32,14 +63,14 @@ class ShoppingCart {
         
     }
     render() {
-        const cartEl = document.createElement('section');
+        const cartEl = this.createRootElement('section', 'cart');
         cartEl.innerHTML = `
             <h2> Total: \$${0}</h2>
             <button>Order Now!</button>
         `;
-        cartEl.className = 'cart';
+        
         this.totalOutput = cartEl.querySelector('h2');
-        return cartEl;
+        
     }
 }
 
@@ -104,12 +135,12 @@ class Shop {
     render(){
         const renderHook = document.getElementById('app');
 
-        this.cart = new ShoppingCart();
-        const cartEl = this.cart.render();
+        this.cart = new ShoppingCart('app');
+        this.cart.render();
         const productList = new ProductList()
         const prodListEl = productList.render();
 
-        renderHook.append(cartEl);
+        
         renderHook.append(prodListEl);
     }
 }
