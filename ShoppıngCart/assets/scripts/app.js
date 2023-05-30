@@ -1,17 +1,31 @@
+class Product {
+    title = 'Default';
+    imageUrl;
+    price;
+    description;
+
+    constructor(title, image, desc, price) {
+        this.title = title;
+        this.imageUrl = image;
+        this.description = desc;
+        this.price = price;
+    }
+};
+
+
+
 const productList = {
     products: [
-        {
-            title: 'A Pillow',
-            imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbkhRx3olkhh8Cw8U0a1ayx5LbKzMwSm4SjFwzZCuelQ&s',
-            price: 19.99,
-            description: 'Lorem ipsum'
-        },
-        {
-            title: 'A Carpet',
-            imageUrl: 'https://justfunfacts.com/wp-content/uploads/2019/05/carpet.jpg',
-            price: 69.99,
-            description: 'Lorem ipsum'
-        }
+        new Product(
+            'A Pillow',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbkhRx3olkhh8Cw8U0a1ayx5LbKzMwSm4SjFwzZCuelQ&s', 
+            'Lorem Ipsum', 
+            19.99 ),
+        new Product(
+            'A Carpet',
+            'https://justfunfacts.com/wp-content/uploads/2019/05/carpet.jpg',
+            'Lorem ipsum',
+            69.99)
 
     ],
     render() {
