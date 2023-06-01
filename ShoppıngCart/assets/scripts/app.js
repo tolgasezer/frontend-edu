@@ -20,9 +20,13 @@ class ElementAttribute {
 }
 
 class Component {
-    constructor( renderHook) {
+    constructor(renderHook, shouldRender = true) {
         this.hook = renderHook;
+        if(shouldRender){
+            this.render();
+        }
     }
+    render() {}
 
     createRootElement(tag, cssClasses, attributes) {
         const rootElemet = document.createElement(tag);
@@ -76,8 +80,9 @@ class ShoppingCart extends Component {
 
 class ProductItem extends Component {
     constructor(product, renderHook ){
-        super(renderHook)
+        super(renderHook, false)
         this.product = product;
+        this.render();
     }
     addToCart(){
         App.addProductToCart(this.product);
@@ -86,60 +91,71 @@ class ProductItem extends Component {
     render(){
         const prodEl= this.createRootElement('li', 'product-item');
             
-            prodEl.innerHTML = `
-                <div>
-                    <img src="${this.product.imageUrl}" alt="${this.product.title}" >
-                    <div class="product-item__content">
-                        <h2>${this.product.title}</h2>
-                        <h3>\$${this.product.price}</h3>
-                        <p>${this.product.description}</p>
-                        <button>Add to Cart</button>
-                    </div>
+        prodEl.innerHTML = `
+            <div>
+                <img src="${this.product.imageUrl}" alt="${this.product.title}" >
+                <div class="product-item__content">
+                    <h2>${this.product.title}</h2>
+                    <h3>\$${this.product.price}</h3>
+                    <p>${this.product.description}</p>
+                    <button>Add to Cart</button>
                 </div>
-            `;
-            const addCartBtn = prodEl.querySelector('button');
-            addCartBtn.addEventListener('click',this.addToCart.bind(this));
+            </div>
+        `;
+        const addCartBtn = prodEl.querySelector('button');
+        addCartBtn.addEventListener('click',this.addToCart.bind(this));
         
     }
 }
 
 class ProductList extends Component {
-    products = [
-        new Product(
-            'A Pillow',
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbkhRx3olkhh8Cw8U0a1ayx5LbKzMwSm4SjFwzZCuelQ&s', 
-            'Lorem Ipsum', 
-            19.99 ),
-        new Product(
-            'A Carpet',
-            'https://justfunfacts.com/wp-content/uploads/2019/05/carpet.jpg',
-            'Lorem ipsum',
-            69.99)
-
-    ];
+    products = [];
 
     constructor(renderHook){
         super(renderHook);
+        this.fetchProducts();
+    }
+    fetchProducts(){
+        this.products = [
+            new Product(
+                'A Pillow',
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbkhRx3olkhh8Cw8U0a1ayx5LbKzMwSm4SjFwzZCuelQ&s', 
+                'Lorem Ipsum', 
+                19.99 ),
+                new Product(
+                    'A Carpet',
+                    'https://justfunfacts.com/wp-content/uploads/2019/05/carpet.jpg',
+                    'Lorem ipsum',
+                    69.99)
+                ];    
+        this.renderProducts();
+    }
+
+    renderProducts(){
+        for (const prod of this.products){
+            new ProductItem(prod, 'prod-list');
+        }
     }
 
     render() {
         this.createRootElement('ul', 'product-list',[new ElementAttribute('id','prod-list')]);
         
-        for (const prod of this.products){
-            const prodItem = new ProductItem(prod, 'prod-list');
-            prodItem.render();
-        
+        if (this.products && this.products.length > 0) {
+            this.renderProducts();
         }
     
     }
 }
 
-class Shop {
+class Shop extends Component {
+    constructor() {
+        super();
+    }
+
     render(){
         this.cart = new ShoppingCart('app');
-        this.cart.render();
-        const productList = new ProductList('app')
-        productList.render();
+        new ProductList('app')
+        
 
     }
 }
@@ -147,7 +163,6 @@ class Shop {
 class App {
     static init() {
         const shop = new Shop();
-        shop.render();
         this.cart = shop.cart;
 
     }
