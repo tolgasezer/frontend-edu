@@ -66,12 +66,20 @@ class ShoppingCart extends Component {
         this.cartItems = updatedItems;
         
     }
+    orderProducts() {
+        console.log('Ordering...');
+        console.log(this.item);
+    }
+
     render() {
         const cartEl = this.createRootElement('section', 'cart');
         cartEl.innerHTML = `
             <h2> Total: \$${0}</h2>
             <button>Order Now!</button>
         `;
+        const orderNowBtn = cartEl.querySelector('button');
+        //orderNowBtn.addEventListener('click',() =>this.orderProducts());
+        orderNowBtn.addEventListener('click',() =>this.orderProducts());
         
         this.totalOutput = cartEl.querySelector('h2');
         
