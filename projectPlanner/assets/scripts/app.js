@@ -31,8 +31,10 @@ class ProjectList {
     addProject() {}
 
     switchProject(projectId) {
-        const projectIndex = this.projects.findIndex(p => p.id === projectId)
-        this.projects.splice(projectIndex, 1);
+        //const projectIndex = this.projects.findIndex(p => p.id === projectId)
+        //this.projects.splice(projectIndex, 1);
+        this.addProject();
+        this.projects = this.projects.filter(p => p.id !== projectId);
     }
 }
 
