@@ -13,7 +13,11 @@ class DOMHelper {
     }
 }
 
-class Tooltip {}
+class Tooltip {
+    show() {
+        console.log('The tooltip...')
+    }
+}
 
 class ProjectItem {
   constructor(id, updateProjectListsFunction, type) {
@@ -23,7 +27,18 @@ class ProjectItem {
     this.connectSwitchButton(type);
   }
 
-  connectMoreInfoButton() {}
+  showMoreInfoHandler() {
+    const tooltip = new Tooltip();
+    tooltip.show();
+  }
+
+  connectMoreInfoButton() {
+    const projectItemElement = document.getElementById(this.id);
+    const moreInfoBtn = projectItemElement.querySelector('button:first-of-type');
+    moreInfoBtn.addEventListener('click', this.showMoreInfoHandler)
+
+   
+  }
 
   connectSwitchButton(type) {
     const projectItemElement = document.getElementById(this.id);
