@@ -38,8 +38,8 @@ class Component {
 }
 
 class Tooltip extends Component {
-    constructor(closeNotifierFunction, text){
-        super();
+    constructor(closeNotifierFunction, text, hostElementId){
+        super(hostElementId);
         this.closeNotifier = closeNotifierFunction;
         this.text = text;
         this.create();
@@ -53,6 +53,8 @@ class Tooltip extends Component {
         const tooltipElement = document.createElement('div');
         tooltipElement.className = 'card';
         tooltipElement.textContent = this.text;
+        console.log(this.hostElement.getBoundingClientRect());
+
         tooltipElement.addEventListener('click', this.closeTooltip.bind(this));
         this.element= tooltipElement;
     }
@@ -77,7 +79,7 @@ class ProjectItem {
     const tooltipText = projectElement.dataset.extraInfo;
     const tooltip = new Tooltip(() => {
         this.hasActiveTooltip = false;
-    }, tooltipText);
+    }, tooltipText, this.id);
     tooltip.attach();
     this.hasActiveTooltip = true;
   }
