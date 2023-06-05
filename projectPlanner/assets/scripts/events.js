@@ -45,7 +45,7 @@ div.addEventListener('click', event => {
   console.log('clicked div');
   console.log(event);
 
-});
+}, true);
 
 button.addEventListener('click', event =>{
   console.log('clicked button');
