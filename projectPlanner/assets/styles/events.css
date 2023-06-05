@@ -39,3 +39,17 @@ button:active {
 #long-one {
   height: 3000px;
 }
+
+ul {
+  list-style-type: none;
+}
+
+li {
+  padding: 1rem;
+  border: 1px solid #ccc;
+}
+
+.highlight {
+  background-color: red;
+  color: white;
+}
