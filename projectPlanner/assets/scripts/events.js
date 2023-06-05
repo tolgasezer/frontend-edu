@@ -41,13 +41,14 @@ form.addEventListener('submit', event => {
 
 const div = document.querySelector('div');
 
-div.addEventListener('click', event => {
+div.addEventListener('mouseenter', event => {
   console.log('clicked div');
   console.log(event);
 
-}, true);
+});
 
-button.addEventListener('click', event =>{
+button.addEventListener('mouseenter', event =>{
+  event.stopPropagation(); //it stops ancestor element's click listener
   console.log('clicked button');
   console.log(event);
 });
