@@ -173,7 +173,19 @@ class ProjectList {
         list.parentElement.classList.remove('droppable');
       }
 
+    });
+
+    list.addEventListener('drop', event =>{
+      const prjId = event.dataTransfer.getData('text/plain');
+      if (this.projects.find(p => p.id ===prjId)){
+        return;
+      }
+      document.getElementById(prjId).querySelector('button:last-of-type').click();
+      list.parentElement.classList.remove('droppable');
+      event.preventDefault();
+
     })
+
   }
 
   setSwitchHandlerFunction(switchHandlerFunction) {
