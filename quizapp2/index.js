@@ -31,7 +31,7 @@ let questions = [
   }
 ]
 
-fetch('https://opentdb.com/api.php?amount=10&category=18&difficulty=easy&type=multiple')
+fetch('https://opentdb.com/api.php?amount=10&category=18&difficulty=easy&type=multiple').then(console.log(Response));
 
 
 //logJSONData(); // 10 soruluk bir array donuyor. gelen arrayden question ve answerlari gerekli yere iletecek bicimde guncellemem lazim 
