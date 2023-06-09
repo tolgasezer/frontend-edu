@@ -4,7 +4,7 @@ const fetchPostsButton = document
   .getElementById("available-posts")
   .querySelector("button");
 
-function sendHttpRequest(method, url) {
+function sendHttpRequest(method, url, data) {
   const promise = new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
     xhr.open(method, url);
@@ -15,7 +15,7 @@ function sendHttpRequest(method, url) {
       resolve(xhr.response);
     };
 
-    xhr.send();
+    xhr.send(JSON.stringify(data));
   });
   return promise;
 };
@@ -33,6 +33,17 @@ async function fetchPost() {
     postEL.querySelector("p").textContent = post.body;
     postElement.append(postEL);
   });
-}
+};
+
+async function createPost(title, content) {
+  const userId = Math.random();
+  const post = {
+    title: title,
+    body: content,
+    userId: userId
+  }
+  sendHttpRequest('POST','https://jsonplaceholder.typicode.com/posts', post)
+};
 
 fetchPostsButton.addEventListener("click", fetchPost);
+createPost('Deneme', 'Deneme deneme');
