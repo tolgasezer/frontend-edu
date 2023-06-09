@@ -5,19 +5,28 @@ const fetchPostsButton = document.querySelector("#available-posts button");
 //const postList = document.querySelector('')
 
 function sendHttpRequest(method, url, data) {
-  const promise = new Promise((resolve, reject) => {
-    const xhr = new XMLHttpRequest();
-    xhr.open(method, url);
+  // const promise = new Promise((resolve, reject) => {
+  //   const xhr = new XMLHttpRequest();
+  //   xhr.open(method, url);
 
-    xhr.responseType = "json";
+  //   xhr.responseType = "json";
 
-    xhr.onload = function () {
-      resolve(xhr.response);
-    };
+  //   xhr.onload = function () {
+  //     if (xhr.status >=200 && xhr.status<300){
+  //       resolve(xhr.response);
 
-    xhr.send(JSON.stringify(data));
-  });
-  return promise;
+  //     }else {
+  //       reject(new Error ('Something went wrong!'));
+  //     }
+  //   };
+
+  //   xhr.send(JSON.stringify(data));
+  // });
+  // return promise;
+  return fetch(url).then(response => {
+    return response.json();
+  })
+
 };
 
 async function fetchPost() {
