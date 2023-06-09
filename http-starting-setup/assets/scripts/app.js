@@ -1,6 +1,6 @@
 const postElement = document.querySelector(".posts");
 const postTemplate = document.getElementById("single-post");
-const form = document.querySelector('#new-post form');
+const form = document.querySelector("#new-post form");
 const fetchPostsButton = document.querySelector("#available-posts button");
 //const postList = document.querySelector('')
 
@@ -23,14 +23,26 @@ function sendHttpRequest(method, url, data) {
   //   xhr.send(JSON.stringify(data));
   // });
   // return promise;
-  return fetch(url,{
+  return fetch(url, {
     method: method,
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
   }).then(response => {
-    return response.json();
+    if (response.status >= 200 && response.status < 300) {
+      return response.json()
+    }else {
+      response.json().then(errData => {
+        console.log(errData);
+        throw new Error('Something went wrong!');
+      });
+    }
+  } ).catch (error => {
+    console.log(error);
+    throw new Error('Something bla bla');
   })
-
-};
+}
 
 async function fetchPost() {
   const responseData = await sendHttpRequest(
@@ -43,34 +55,35 @@ async function fetchPost() {
     const postEL = document.importNode(postTemplate.content, true);
     postEL.querySelector("h2").textContent = post.title.toUpperCase();
     postEL.querySelector("p").textContent = post.body;
-    postEL.querySelector('li').id = post.id;
+    postEL.querySelector("li").id = post.id;
     postElement.append(postEL);
   });
-};
+}
 
 async function createPost(title, content) {
   const userId = Math.random();
   const post = {
     title: title,
     body: content,
-    userId: userId
-  }
-  sendHttpRequest('POST','https://jsonplaceholder.typicode.com/posts', post)
-};
+    userId: userId,
+  };
+  sendHttpRequest("POST", "https://jsonplaceholder.typicode.com/posts", post);
+}
 
 fetchPostsButton.addEventListener("click", fetchPost);
-form.addEventListener('submit', event=>{
+form.addEventListener("submit", (event) => {
   event.preventDefault();
-  const enteredTitle = event.currentTarget.querySelector('#title').value;
-  const enteredContent = event.currentTarget.querySelector('#content').value;
+  const enteredTitle = event.currentTarget.querySelector("#title").value;
+  const enteredContent = event.currentTarget.querySelector("#content").value;
 
   createPost(enteredTitle, enteredContent);
-
-})
-postElement.addEventListener('click', event =>{
-  if (event.target.tagName === 'BUTTON'){
-    const postId = event.target.closest('li').id;
-    sendHttpRequest('DELETE',`https://jsonplaceholder.typicode.com/posts/${postId}`);
+});
+postElement.addEventListener("click", (event) => {
+  if (event.target.tagName === "BUTTON") {
+    const postId = event.target.closest("li").id;
+    sendHttpRequest(
+      "DELETE",
+      `https://jsonplaceholder.typicode.com/posts/${postId}`
+    );
   }
-})
-
+});
