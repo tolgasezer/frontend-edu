@@ -4,9 +4,7 @@ const choices = Array.from(document.getElementsByClassName("choice-text"));
 const nextBtn = document.getElementById("nxt-btn");
 const restartBtn = document.getElementById("restart-btn");
 
-//butona baslangicta disabled att vermeye calistigimda sorular gelmiyor.
 
-// duzeldi ama nasil oldugunu anlamadim... ('disabled, '') seklinde yazmak gerekliymis
 let currentQuestion = {};
 //let acceptingAnswers = false;
 let score = 0;
@@ -31,13 +29,6 @@ let questions = [
   }
 ]
 
-fetch('https://opentdb.com/api.php?amount=10&category=18&difficulty=easy&type=multiple').then(console.log(Response));
-
-
-//logJSONData(); // 10 soruluk bir array donuyor. gelen arrayden question ve answerlari gerekli yere iletecek bicimde guncellemem lazim 
-//const takeQuestion = jsonData
-
-//console.log(takeQuestion);
 
 const CORRECT_BONUS = 10;
 const MAX_QUESTIONS = questions.length;
@@ -56,7 +47,7 @@ getNewQuestion = () => {
   choiceContainer.innerHTML = "";
   nextBtn.setAttribute("disabled", "");
   
-  if (availableQuestions.length == 0 || questionCounter > MAX_QUESTIONS) {
+  if (availableQuestions.length === 0 || questionCounter > MAX_QUESTIONS) {
     nextBtn.classList.add("hidden");
     restartBtn.classList.remove("hidden");
     question.innerText = `Your Score is: ${score * CORRECT_BONUS}/${MAX_QUESTIONS * CORRECT_BONUS}`;
@@ -94,62 +85,11 @@ getNewQuestion = () => {
       
       //console.log(choicesArray.indexOf('div.choice-container.selected'));
       nextBtn.removeAttribute("disabled");
-    });
-    
-    
-    //str+= '<li class="choice-text" id="option">' + currentQuestion.choiceText[i] + '</li>'; bu cok karmasik oldu duzenledim
+    });    
   }
-  
-  
-  
-  //str += '</ul>';
-  //console.log(document.getElementById("choice-container"));
-  //choiceContainer.innerHTML = str;
   availableQuestions.splice(questionIndex, 1);
-  //acceptingAnswers = true;
+  
 };
-
-// clickHandler = () =>{
-//   newChoice.addEventListener('click', (e)=>{
-//     const selectedChoice = e.target;
-//     const selectedIndex = currentQuestion.choiceText[selectedChoice];
-//   })
-//   if (selectedIndex==currentQuestion.answer){
-//     score++;
-//   }
-//   selectedChoice.classList.add('selected');
-//   nextBtn.removeAttribute("disabled");
-//   nextBtn.addEventListener("click", () => {
-//       selectedChoice.classList.remove("selected");
-//       nextBtn.setAttribute("disabled", "");
-//   });
-
-// }
-
-// choices.forEach((choice) => {
-//   choice.addEventListener("click", (e) => {
-//     //console.log(e);
-//     if (!acceptingAnswers) return;
-
-//     acceptingAnswers = false;
-//     const selectedChoice = e.target;
-//     const selectedNumber = selectedChoice.dataset["number"];
-//     //console.log(selectedNumber)
-//     if (selectedNumber == currentQuestion.answer) {
-//       score++;
-//     }
-//     // if selectedChoice change, change to selected class
-    
-//     selectedChoice.classList.add("selected");
-
-//     //secimin ardindan next butonu enable oluyor ve next butonunda selected class i kaldiriliyor.
-//     nextBtn.removeAttribute("disabled");
-//     nextBtn.addEventListener("click", () => {
-//       selectedChoice.classList.remove("selected");
-//       nextBtn.setAttribute("disabled", "");
-//     });
-//   });
-// });
 
 restartQuiz = () => {
   window.location.assign("./index.html");
@@ -165,7 +105,47 @@ nextBtn.addEventListener("click", ()=>{
   };
   getNewQuestion()});
 restartBtn.addEventListener("click", restartQuiz);
-startGame();
+
 
 
 //console.log(currentQuestion.choiceText);
+
+function getTriviaQuestions (method, url, data){
+  return fetch(url, {
+    method: method,
+    body: JSON.stringify(data)
+  }).then(response =>{
+    startGame();
+    return response.json();
+  })
+};
+
+async function fetchTriviaQuestion (){
+  const responseData = await getTriviaQuestions(
+    'GET',
+    'https://opentdb.com/api.php?amount=10&category=18&difficulty=easy&type=multiple'
+    );
+    
+  const listOfPosts = responseData;
+  
+  const newQuestions =listOfPosts.results.map(question => {
+    const formattedQuestion = {
+      question: question.question,
+      choiceText: [...question.incorrect_answers, question.correct_answer],
+      answer: 3
+    }
+    return formattedQuestion;
+  })
+  newQuestions.forEach(question =>{
+    availableQuestions.push(question);
+  })
+  //console.log(listOfPosts.results[0].question);
+  // for(let i = 0; i < listOfPosts.results.length; i++){
+  //  questions.push(listOfPosts.results[i]);
+  // }
+  //console.log(questions);
+  console.log(availableQuestions.length);
+}
+
+fetchTriviaQuestion();
+
