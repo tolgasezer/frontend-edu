@@ -18,11 +18,15 @@ fetch(
   })
   .then((loadedQuestions) => {
     questions = loadedQuestions.results.map((question) => {
+      const choices = [...question.incorrect_answers, question.correct_answer];
+      const shuffledChoices = shuffle(choices);
+      const answerIndex = shuffledChoices.indexOf(question.correct_answer);
       const formattedQuestion = {
         question: question.question,
-        choiceText: [...question.incorrect_answers, question.correct_answer],
-        answer: 3,
+        choiceText: shuffledChoices,
+        answer: answerIndex,
       };
+      
 
       return formattedQuestion;
     });
@@ -31,9 +35,26 @@ fetch(
     startGame();
   });
 
-const CORRECT_BONUS = 10;
-const MAX_QUESTIONS = 10;
+  function shuffle(array) {
+    let currentIndex = array.length;
+    let temporaryValue, randomIndex;
+  
+    while (currentIndex !== 0) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+  
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+  
+    return array;
+  }
 
+
+
+  const CORRECT_BONUS = 10;
+  const MAX_QUESTIONS = 10;
 
 
 startGame = () => {
@@ -46,7 +67,7 @@ startGame = () => {
 }
 
 getNewQuestion = () => {
-  choiceContainer.innerHTML = "";
+  choiceContainer.innerText = "";
   nextBtn.setAttribute("disabled", "");
 
   if (availableQuestions.length === 0 || questionCounter > MAX_QUESTIONS) {
@@ -59,6 +80,7 @@ getNewQuestion = () => {
     console.log(
       `Your Score is: ${score * CORRECT_BONUS}/${MAX_QUESTIONS * CORRECT_BONUS}`
     );
+    return;
   }
   questionCounter++;
   const questionIndex = Math.floor(Math.random() * availableQuestions.length);
