@@ -32,7 +32,7 @@ fetch(
   });
 
 const CORRECT_BONUS = 10;
-const MAX_QUESTIONS = questions.length;
+const MAX_QUESTIONS = 10;
 
 
 
