@@ -71,7 +71,10 @@ async function createPost(title, content) {
     body: content,
     userId: userId,
   };
-  sendHttpRequest("POST", "https://jsonplaceholder.typicode.com/posts", post);
+  const fd = new FormData (form);
+  fd.append('userId', userId);
+  const response = await axios.post("https://jsonplaceholder.typicode.com/posts", fd);
+  console.log(response);
 }
 
 fetchPostsButton.addEventListener("click", fetchPost);
@@ -85,9 +88,6 @@ form.addEventListener("submit", (event) => {
 postElement.addEventListener("click", (event) => {
   if (event.target.tagName === "BUTTON") {
     const postId = event.target.closest("li").id;
-    sendHttpRequest(
-      "DELETE",
-      `https://jsonplaceholder.typicode.com/posts/${postId}`
-    );
+    axios.delete(`https://jsonplaceholder.typicode.com/posts/${postId}`);
   }
 });
