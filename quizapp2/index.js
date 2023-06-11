@@ -3,11 +3,14 @@ const choiceContainer = document.getElementById("choice-container");
 const choices = Array.from(document.getElementsByClassName("choice-text"));
 const nextBtn = document.getElementById("nxt-btn");
 const restartBtn = document.getElementById("restart-btn");
-
+const loader = document.getElementById('loader');
+const game = document.getElementById('containerC');
 let currentQuestion = {};
 let score = 0;
 let questionCounter = 0;
 let availableQuestions = [];
+
+game.classList.add('hidden');
 
 let questions = [];
 fetch(
@@ -61,9 +64,9 @@ startGame = () => {
   score = 0;
   questionCounter = 0;
   availableQuestions = [...questions];
-
-  console.log(availableQuestions)
   getNewQuestion();
+  game.classList.remove('hidden');
+  loader.classList.add('hidden');
 }
 
 getNewQuestion = () => {
