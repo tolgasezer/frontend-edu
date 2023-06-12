@@ -1,4 +1,7 @@
-class ProjectList {
+import { ProjectItem } from "./ProjectItem.js";
+import { DOMHelper } from "../Utility/Domhelper.js";
+
+export class ProjectList {
     projects = [];
   
     constructor(type) {
