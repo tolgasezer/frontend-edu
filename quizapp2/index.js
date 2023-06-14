@@ -5,14 +5,15 @@ const nextBtn = document.getElementById("nxt-btn");
 const restartBtn = document.getElementById("restart-btn");
 const loader = document.getElementById('loader');
 const game = document.getElementById('containerC');
+game.classList.add('hidden');
+game.classList.add('justify-center');
+
 let currentQuestion = {};
 let score = 0;
 let questionCounter = 0;
 let availableQuestions = [];
-
-game.classList.add('hidden');
-
 let questions = [];
+
 fetch(
   "https://opentdb.com/api.php?amount=10&category=18&difficulty=easy&type=multiple"
 )
@@ -38,7 +39,7 @@ fetch(
     startGame();
   });
 
-  function shuffle(array) {
+  shuffle = array => {
     let currentIndex = array.length;
     let temporaryValue, randomIndex;
   
@@ -58,7 +59,7 @@ fetch(
 
   const CORRECT_BONUS = 10;
   const MAX_QUESTIONS = 10;
-
+  
 
 startGame = () => {
   score = 0;
